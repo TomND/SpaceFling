@@ -4,11 +4,10 @@ using System.Collections.Generic;
 
 public class Orbit : MonoBehaviour
 {
-   private PlanetProperties  properties;
-   private Rigidbody         rb;
-   private List <GameObject> planets = new List <GameObject>();
-   public float initialForce;
-   public bool         ignoreSun;
+   private PlanetProperties properties;
+   private Rigidbody        rb;
+   public float             initialForce;
+   public bool ignoreSun;
 
    // Use this for initialization
    void Start()
@@ -16,14 +15,17 @@ public class Orbit : MonoBehaviour
       properties = GetComponent <PlanetProperties>();
       rb         = GetComponent <Rigidbody>();
 
-      rb.AddForce(transform.up * initialForce);//100000
-      planets = Detector.ReturnOtherPlanets(gameObject);
+      rb.AddForce(transform.up * initialForce);
+      //planets = Detector.ReturnOtherPlanets(gameObject);
    }
 
    // Update is called once per frame
    void FixedUpdate()
    {
       CalculatePulls();
+      if(Input.GetButtonDown("Debug")){
+         print(Detector.ReturnOtherPlanets(gameObject));
+         }
    }
 
    void ManageGravityPulls()
@@ -32,7 +34,10 @@ public class Orbit : MonoBehaviour
 
    void CalculatePulls()
    {
-      foreach(GameObject planet in planets){
+      if(Detector.planets.Count == 0){ // planets don't get discovered for a few frames. temporary fix
+         return;
+         }
+      foreach(GameObject planet in Detector.planets){
           if(planet == gameObject){
              continue;
              }
@@ -48,12 +53,11 @@ public class Orbit : MonoBehaviour
           Vector3          pull  = planet.transform.position - transform.position;
           pull.Normalize();
           if(Input.GetButtonDown("Debug")){
-            print(props.GetMass());
-          }
+             print(props.GetMass());
+             }
 
           float pullStrength = (SpaceConstants.Gravity() * props.GetMass()) / Mathf.Pow(GetDistance(planet), 2);
-          //print((pull * pullStrength) / 1000000);
-          //print(pull * pullStrength);
+
           rb.AddForce((pull * pullStrength) / 1000000, ForceMode.Acceleration);
           }
    }

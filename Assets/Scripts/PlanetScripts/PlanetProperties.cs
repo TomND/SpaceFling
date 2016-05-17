@@ -21,6 +21,21 @@ public class PlanetProperties : MonoBehaviour {
    {
    }
 
+   void UpdateRealMass()
+   {
+      realMass = mass * Mathf.Pow(10, massPowerTen);
+   }
+
+   public float GetMassConstant()
+   {
+      return(mass);
+   }
+
+   public float GetMassPower()
+   {
+      return(massPowerTen);
+   }
+
    public float GetMass()
    {
       return(realMass);
@@ -29,5 +44,17 @@ public class PlanetProperties : MonoBehaviour {
    public float GetRadius()
    {
       return(radius);
+   }
+
+   public void SetMass(float newMass)
+   {
+      mass = newMass;
+      UpdateRealMass();
+   }
+
+   public void SetMassPower(float newMassPower)
+   {
+      massPowerTen = newMassPower;
+      UpdateRealMass();
    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Detector : MonoBehaviour {
-   private static List <GameObject> planets = new List <GameObject>();
+   public static List <GameObject> planets = new List <GameObject>();
 
    // Use this for initialization
    void Start()
@@ -39,10 +39,28 @@ public class Detector : MonoBehaviour {
    // returns all planets from planets except self
    public static List <GameObject> ReturnOtherPlanets(GameObject self)
    {
-      //print(planets);
-      List <GameObject> otherPlanets = planets;
+      List <GameObject> otherPlanets = new List <GameObject>(planets);
       otherPlanets.Remove(self);
-      //print(planets);
+
       return(otherPlanets);
+   }
+
+   public static void UpdatePlanet(GameObject planet, float value, int values = 0)
+   {
+      int index = planets.IndexOf(planet);
+
+      planets[index].GetComponent <PlanetProperties>().SetMass(2);
+
+
+      PlanetProperties props = planets[index].GetComponent <PlanetProperties>();
+
+
+      if(values == 1){
+         props.SetMass(value);
+         }
+      else if(values == 2){
+              props.SetMassPower(value);
+              }
+      print(planets[index].GetComponent <PlanetProperties>().GetMass());
    }
 }

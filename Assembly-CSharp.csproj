@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraScripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\CameraScripts\PlanetSelector.cs" />
      <Compile Include="Assets\Scripts\PlanetScripts\Detector.cs" />
      <Compile Include="Assets\Scripts\PlanetScripts\Orbit.cs" />
      <Compile Include="Assets\Scripts\PlanetScripts\PlanetProperties.cs" />
