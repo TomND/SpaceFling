@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 public class Detector : MonoBehaviour {
    public static List <GameObject> planets = new List <GameObject>();
+   private static GameObject       camera;
 
    // Use this for initialization
    void Start()
    {
+      camera = Camera.main.gameObject;
    }
 
    // Update is called once per frame
@@ -15,10 +17,26 @@ public class Detector : MonoBehaviour {
    {
    }
 
+   public static void ResetPlanets()
+   {
+      planets = new List <GameObject>();
+   }
+
+   public void ResetPlanetMasses()
+   {
+      foreach(GameObject planet in planets){
+          planet.GetComponent <PlanetProperties>().SetStartValues();
+          PlanetProperties props = planet.GetComponent <PlanetProperties>();
+          props.SetStartValues();
+          }
+
+      camera.GetComponent <PlanetSelector>().ResetAll();
+
+   }
+
    void OnTriggerEnter(Collider other)
    {
       if(other.tag == "Planet"){
-         //print(other.gameObject);
          planets.Add(other.gameObject);
          }
    }
@@ -49,7 +67,7 @@ public class Detector : MonoBehaviour {
    {
       int index = planets.IndexOf(planet);
 
-      planets[index].GetComponent <PlanetProperties>().SetMass(2);
+      //planets[index].GetComponent <PlanetProperties>().SetMass(2);
 
 
       PlanetProperties props = planets[index].GetComponent <PlanetProperties>();
@@ -61,6 +79,5 @@ public class Detector : MonoBehaviour {
       else if(values == 2){
               props.SetMassPower(value);
               }
-      print(planets[index].GetComponent <PlanetProperties>().GetMass());
    }
 }

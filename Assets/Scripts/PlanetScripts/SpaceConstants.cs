@@ -7,6 +7,7 @@ public class SpaceConstants : MonoBehaviour
    private static float gravity = 6.673f * Mathf.Pow(10, -11);
    public float         time;
    public Text          timeVisualizer;
+   public GameObject    spawnPoint;
 
    // Use this for initialization
    void Start()
@@ -59,5 +60,10 @@ public class SpaceConstants : MonoBehaviour
          time = 0;
          }
       timeVisualizer.text = "X " + time.ToString();
+   }
+
+   public void SpawnMoon()
+   {
+      Instantiate(Resources.Load("Moon"), spawnPoint.transform.position, Quaternion.identity);
    }
 }

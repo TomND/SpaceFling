@@ -34,7 +34,6 @@ public class PlanetSelector : MonoBehaviour
                SetupUI(hit.collider.gameObject);
                }
             else{
-                print("here");
                 UI.SetActive(false);
                 }
             }
@@ -102,6 +101,27 @@ public class PlanetSelector : MonoBehaviour
 
          multiplier.text = value.ToString();
          }
+   }
+
+   void ResetSlider()
+   {
+      multiplier.text = currentPlanet.GetComponent <PlanetProperties>().GetMassPower().ToString();
+      scrollBar.value = currentPlanet.GetComponent <PlanetProperties>().GetMassPower() / 30;
+   }
+
+   void ResetText()
+   {
+      inputField.text = currentPlanet.GetComponent <PlanetProperties>().GetMassConstant().ToString();
+   }
+
+   public void ResetAll()
+   {
+      try{
+         ResetSlider();
+         ResetText();
+      }
+      catch{
+      }
    }
 
    public void UpdateAll()

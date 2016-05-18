@@ -58,7 +58,11 @@ public class Orbit : MonoBehaviour
 
           float pullStrength = (SpaceConstants.Gravity() * props.GetMass()) / Mathf.Pow(GetDistance(planet), 2);
 
-          rb.AddForce((pull * pullStrength) / 1000000, ForceMode.Acceleration);
+          try{
+             rb.AddForce((pull * pullStrength) / 1000000, ForceMode.Acceleration);
+          }
+          catch{
+          }
           }
    }
 
