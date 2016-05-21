@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlanetProperties : MonoBehaviour {
+public class PlanetProperties : MonoBehaviour
+{
+  /*
+  * Contains information on a aplanet and methods to access or change those values
+  */
    public float  mass;
    public float  massPowerTen;
    private float realMass;

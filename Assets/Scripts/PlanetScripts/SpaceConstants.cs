@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class SpaceConstants : MonoBehaviour
 {
+  /*
+  * Contains a few constant values such as gravity, speed of simulation, etc..
+  */
    private static float gravity = 6.673f * Mathf.Pow(10, -11);
    public float         time;
    public Text          timeVisualizer;

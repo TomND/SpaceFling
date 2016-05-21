@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class DespawnTimer : MonoBehaviour {
-
+  /*
+  * Despawns object it is attached too after despawnTime seconds.
+  */
     private float DespawnTime = 500;
     private float currentTime;
 

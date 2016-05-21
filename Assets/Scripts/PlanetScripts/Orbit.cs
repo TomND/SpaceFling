@@ -4,10 +4,13 @@ using System.Collections.Generic;
 
 public class Orbit : MonoBehaviour
 {
-   private PlanetProperties properties;
-   private Rigidbody        rb;
-   public float             initialForce;
-   public bool ignoreSun;
+  /*
+  * This class handles the calculations of the force from other planets and applies that force
+  */
+   private PlanetProperties properties;   // reference to PlanetProperties script
+   private Rigidbody        rb;           // the Rigidbody
+   public float             initialForce; // initialforce to apply to the plabnet
+   public bool ignoreSun;                 // if true, ignores gravity pull from Sun
 
    // Use this for initialization
    void Start()
@@ -16,7 +19,6 @@ public class Orbit : MonoBehaviour
       rb         = GetComponent <Rigidbody>();
 
       rb.AddForce(transform.up * initialForce);
-      //planets = Detector.ReturnOtherPlanets(gameObject);
    }
 
    // Update is called once per frame
@@ -34,6 +36,10 @@ public class Orbit : MonoBehaviour
 
    void CalculatePulls()
    {
+      /*
+       * Calculated the gravitational Pull affecting the planet, and applies the force the planet
+       * force is currently divided by a factor of 1000000 for the current scenario scenes.
+       */
       if(Detector.planets.Count == 0){ // planets don't get discovered for a few frames. temporary fix
          return;
          }
@@ -46,8 +52,6 @@ public class Orbit : MonoBehaviour
                 continue;
                 }
              }
-          //print(planet);
-          //print("i am" + planet);
 
           PlanetProperties props = planet.GetComponent <PlanetProperties>();
           Vector3          pull  = planet.transform.position - transform.position;
@@ -68,6 +72,9 @@ public class Orbit : MonoBehaviour
 
    float GetDistance(GameObject other)
    {
+      /*
+       * Returns the distance to another object, multiplied by 100 to get simulated values
+       */
       return(Vector3.Distance(transform.position, other.transform.position) * 100);
    }
 }
